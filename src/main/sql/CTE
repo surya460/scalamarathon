@@ -1,0 +1,14 @@
+//CTE
+
+WITH SALES_COUNT AS ( \
+select staff_id,count(*) as order_count from sales.orders  where YEAR(order_date)='2018' group by staff_id \
+) \
+SELECT AVG(order_count) from SALES_COUNT;
+
+
+//Hierarchial CTE
+
+WITH reporting_data AS ( \
+SELECT staff_id,first_name,manager_id from sales.staffs WHERE manager_id IS NULL \
+UNION ALL select e.staff_id,e.first_name,e.manager_id FROM sales.staffs e JOIN reporting_data m on e.manager_id=m.staff_id) \
+SELECT * from reporting_data;

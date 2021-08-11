@@ -1,0 +1,10 @@
+ELECT model_year,Children_Bicycles,Comfort_Bicycles,Cruisers_Bicycles,Cyclocross_Bicycles,Mountain_Bikes,Road_Bikes,Electric_Bikes FROM \
+(SELECT model_year, \
+SUM(CASE WHEN category_name='Children Bicycles' THEN 1  ELSE 0 END) AS Children_Bicycles, \
+sum(CASE WHEN category_name='Comfort Bicycles' THEN 1  ELSE 0 END) AS Comfort_Bicycles, \
+sum(CASE WHEN category_name='Cruisers Bicycles' THEN 1  ELSE 0 END) AS Cruisers_Bicycles, \
+sum(CASE WHEN category_name='Cyclocross Bicycles' THEN 1  ELSE 0 END) AS Cyclocross_Bicycles, \
+sum(CASE WHEN category_name='Mountain Bikes' THEN 1  ELSE 0 END) AS Mountain_Bikes, \
+sum(CASE WHEN category_name='Road Bikes' THEN 1  ELSE 0 END) AS Road_Bikes, \
+sum(CASE WHEN category_name='Electric Bikes' THEN 1  ELSE 0 END) AS Electric_Bikes \
+FROM production.products p INNER JOIN production.categories c ON p.category_id=c.category_id group by model_year) t;

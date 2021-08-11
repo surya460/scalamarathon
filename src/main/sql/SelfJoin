@@ -1,0 +1,11 @@
+//Self Join
+
+select e.first_name + ' ' + e.last_name,m.first_name+ ' ' + m.last_name from sales.staffs e left join sales.staffs m on e.manager_id=m.staff_id;
+
+
+select cust1.city,cust1.first_name+ ' ' + cust1.last_name as customer1 ,cust2.first_name + ' ' +cust2.last_name as customer2 from sales.customers cust1 join sales.customers cust2 on cust1.city=cust2.city and cust1.customer_id > cust2.customer_id order by cust1.city,cust1.first_name,cust1.last_name;
+
+
+select cust1.city,cust1.first_name+ ' ' + cust1.last_name as customer1 ,cust2.first_name + ' ' +cust2.last_name as customer2 from sales.customers cust1 join sales.customers cust2 on cust1.city=cust2.city and cust1.customer_id <> cust2.customer_id order by cust1.city,cust1.first_name,cust1.last_name;
+
+
